@@ -8,6 +8,7 @@ function runServer(){
 }
 
 app.configure('production', function(){
+   app.use(express.compress());
    app.use(express.static("./public_build"));
    requirejs.optimize({
       appDir : "./public",
