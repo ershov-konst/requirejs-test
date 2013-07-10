@@ -1,3 +1,6 @@
 requirejs.config({
-   baseUrl: '/lib'
+   baseUrl: 'lib',
+   paths : {
+      "super" : "../ext/requirejs/plugins/super"
+   }
 });

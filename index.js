@@ -11,7 +11,7 @@ app.configure('production', function(){
    app.use(express.static("./public_build"));
    requirejs.optimize({
       appDir : "./public",
-      baseUrl: "lib",
+      mainConfigFile : "main.js",
       dir : "./public_build",
       modules : [
          {

@@ -1,3 +1,3 @@
-require(["b", "e"], function(){
+require(["b", "e", "super!a"], function(){
    console.log("module 1 was loaded");
 });
