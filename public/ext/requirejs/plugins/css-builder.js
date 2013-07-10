@@ -1,4 +1,4 @@
-define(['require', './css-normalize'], function(req, normalize) {
+define(['require', './css-normalize', './css-path-resolver'], function(req, normalize, csspr) {
    var nodePrint = function() {};
    if (requirejs.tools)
       requirejs.tools.useLib(function(req) {
@@ -164,7 +164,7 @@ define(['require', './css-normalize'], function(req, normalize) {
 
       name += !parse ? '.css' : '.less';
 
-      var fileUrl = req.toUrl(name);
+      var fileUrl = req.toUrl(csspr(name));
 
       //external URLS don't get added (just like JS requires)
       if (fileUrl.substr(0, 7) == 'http://' || fileUrl.substr(0, 8) == 'https://')
@@ -205,7 +205,7 @@ define(['require', './css-normalize'], function(req, normalize) {
       if (separateCSS)
          write.asModule(pluginName + '!' + moduleName, 'define(function(){})');
       else
-         write("requirejs.s.contexts._.nextTick = function(f){f()}; require(['r-css'], function(css) { css.addBuffer('" + resourceName + "'); }); requirejs.s.contexts._.nextTick = requirejs.nextTick;");
+         write("requirejs.s.contexts._.nextTick = function(f){f()}; require(['css'], function(css) { css.addBuffer('" + resourceName + "'); }); requirejs.s.contexts._.nextTick = requirejs.nextTick;");
    }
 
    cssAPI.onLayerEnd = function(write, data, parser) {
@@ -240,7 +240,7 @@ define(['require', './css-normalize'], function(req, normalize) {
          css = escape(compress(css));
 
          //the code below overrides async require functionality to ensure instant buffer injection
-         write("requirejs.s.contexts._.nextTick = function(f){f()}; require(['r-css'], function(css) { css.setBuffer('" + css + (parser ? "', true" : "'") + "); }); requirejs.s.contexts._.nextTick = requirejs.nextTick; ");
+         write("requirejs.s.contexts._.nextTick = function(f){f()}; require(['css'], function(css) { css.setBuffer('" + css + (parser ? "', true" : "'") + "); }); requirejs.s.contexts._.nextTick = requirejs.nextTick; ");
       }
 
       //clear layer buffer for next layer
