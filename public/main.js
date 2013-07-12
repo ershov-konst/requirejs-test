@@ -1,5 +1,6 @@
 requirejs.config({
    baseUrl: 'lib',
+   separateCSS : true,
    paths : {
       "super" : "../ext/requirejs/plugins/super",
       "css" : "../ext/requirejs/plugins/css",
