@@ -3,7 +3,7 @@ var app = express();
 var requirejs = require('requirejs');
 
 app.use(express.static("./public_build"));
-requirejs.optimize({
+/*requirejs.optimize({
    appDir : "./public",
    mainConfigFile : "./public/main.js",
    dir : "./public_build",
@@ -15,15 +15,15 @@ requirejs.optimize({
 }, function(){
    app.listen(777);
    console.log("port : 777");
-});
-/*requirejs.optimize({
+});*/
+requirejs.optimize({
    mainConfigFile : "./public/main.js",
-   name : "../modules/module2",
-   out : "public/modules/module2-opt.js"
+   include : ["a", "d", "super!b"],
+   out : "public/modules/module3-opt.js"
 }, function(){
    app.listen(777);
    console.log("port : 777");
-});*/
+});
 
 
 
