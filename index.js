@@ -3,7 +3,10 @@ var app = express();
 var requirejs = require('requirejs');
 
 app.use(express.static("./public_build"));
-/*requirejs.optimize({
+/**
+ * Предварительная оптимизация перечисленных модулей
+ */
+requirejs.optimize({
    appDir : "./public",
    mainConfigFile : "./public/main.js",
    dir : "./public_build",
@@ -13,17 +16,21 @@ app.use(express.static("./public_build"));
       }
    ]
 }, function(){
-   app.listen(777);
-   console.log("port : 777");
-});*/
-requirejs.optimize({
-   mainConfigFile : "./public/main.js",
-   include : ["a", "d", "super!b"],
-   out : "public/modules/module3-opt.js"
-}, function(){
-   app.listen(777);
-   console.log("port : 777");
+
+   /**
+    * Пример сборки набора модулей
+    */
+   requirejs.optimize({
+      mainConfigFile : "./public/main.js",
+      include : ["a", "d", "super!b"],
+      out : "./public_build/modules/module3-opt.js"
+   }, function(){
+      app.listen(777);
+      console.log("port : 777");
+   });
 });
+
+
 
 
 
